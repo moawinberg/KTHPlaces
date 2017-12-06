@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>KTH Places</title>
+    <link rel="apple-touch-icon" href="images/icon4.jpg">
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <!-- Icon -->
+    <link rel="icon" href="images/icon1.jpg">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- Main CSS -->
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <script src="javascript/model.js"></script>
+    <script src="javascript/map.js"></script>
+  </head>
+  <body>
+
+    <!-- Header -->
+    <div class="jumbotron">
+      <div class="row">
+      <!-- Icon -->
+        <div class="icon col-xs-2">
+          <img src="images/icon3.gif" alt="Cinque Terre" width="50" height="50"/>
+        </div>
+
+        <!-- Rubrik -->
+        <div class="col-xs-8">
+          <h2 class="headline">KTH Places</h2>
+        </div>
+
+        <!-- Modal -->
+        <div class="col-xs-1" style="margin-top:15px;">
+            <!-- Trigger the modal with a button -->
+            <div class="glyphicon glyphicon-info-sign btn" data-toggle="modal" data-target="#myModal" style="font-size: 30px">  
+            </div>
+        </div>
+      </div>
+      <br>
+      <input id="textInput" class="controls" type="text" placeholder="Search for classroom at KTH" style="width: 100%;">
+    </div>
+    <!-- Modal -->
+          <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+            
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">About this app</h4>
+                </div>
+                <div class="modal-body">
+                  <p>This web app was made mainly for new students at KTH.
+                  It's an easy-to-use tool to find where your classes are and which floor you can find the correct room on.</p>
+                  <p>Made by Arvid and Moa for mobilutveckling</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div> 
+            </div>
+          </div>
+
+    <!-- Div to show map -->
+    <div id="map"></div>
+    
+
+    <script>
+      $('#textInput').keyup(function(e){
+        if(e.keyCode==13){
+          var searchVal = document.getElementById('textInput').value;
+          var room = getRoomObject(searchVal);
+          console.log(room);
+          console.log(room.latitude);
+          var latlng = { lat: parseFloat(room.latitude), lng: parseFloat(room.longitude)}
+          console.log(latlng);
+          map.setCenter(latlng);
+          map.setZoom(18);
+          setMarker(room, latlng);
+        }
+      })
+
+      navigator.geolocation.getCurrentPosition(
+        function(position) {
+          myPos = {"lat":position.coords.latitude, "lng" : position.coords.longitude};
+          map.setCenter(myPos)
+          var marker = new google.maps.Marker({
+            position: myPos,
+            map: map,
+            title: 'You are here!'
+          });
+
+        },
+        function(error){
+            console.log("hej error i geolocation")
+          
+           console.log(error.code)
+        }, {
+             enableHighAccuracy: true
+        }
+    );
+    </script>
+
+    <body onload="getLocation()">
+    <!-- Google Maps API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyASKo20RxUEi1AyesGfXzF4-witdGTYKxw&callback=initMap"
+    async defer></script>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- Bootstrap JavaScript, needed if you want for instance tabs, models, popovers etc. -->
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+  </body>
+</html>

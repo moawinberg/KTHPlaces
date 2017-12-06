@@ -1,0 +1,24 @@
+{
+  "version": "1.0.0",
+  "private": true,
+  "name": "kthplaces",
+  "description": "Project in mobdev programming",
+  "repository": "https://github.com/arvidlarzzon/MobDevProject",
+  "license": "MIT",
+  "engines": {
+    "node": "7.9.0"
+  },
+  "devDependencies": {
+    "http-server": "^0.9.0",
+    "bower": "^1.8.x"
+  },
+  "scripts": {
+    "postinstall": "bower install",
+    "prestart": "npm install",
+    "start": "http-server app/ -a 0.0.0.0 -p 8000"
+  },
+  "dependencies": {
+    "bower": "^1.8.0",
+    "http-server": "^0.9.0"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "dinner-planner",
+  "description": "A starter project for Interaction Programming course Lab5",
+  "version": "0.0.0",
+  "homepage": "https://github.com/kth-csc-iprog/dinnerplanner-html",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "angular": "1.6.x",
+    "angular-mocks": "1.6.x",
+    "jquery": "~2.1.1",
+    "bootstrap": "~3.x",
+    "angular-route": "1.6.x",
+    "angular-resource": "1.6.x",
+    "angular-animate": "1.6.x"
+  }
+}
